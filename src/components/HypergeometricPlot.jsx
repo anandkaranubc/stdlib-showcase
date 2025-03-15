@@ -92,8 +92,9 @@ const HypergeometricPlot = ({ dataUrl, yMin, yMax, xRange }) => {
               value: "₂F₁(a,b;c;x)",
               angle: -90,
               position: "insideLeft",
-              fontSize: 14,
+              fontSize: 16,
               fill: "#333",
+              dx: -10,
             }}
             tick={{ fontSize: 12, fill: "#333" }}
           />
@@ -107,7 +108,12 @@ const HypergeometricPlot = ({ dataUrl, yMin, yMax, xRange }) => {
               value === "Inf" || value === "-Inf" ? value : value.toFixed(4)
             }
           />
-          <Legend wrapperStyle={{ fontSize: "14px", marginTop: "10px" }} />
+          <Legend
+            layout="horizontal"
+            align="center"
+            verticalAlign="top"
+            wrapperStyle={{ fontSize: "14px", marginBottom: "10px" }}
+          />
           <Line
             type="monotone"
             dataKey="hyp2f1"
