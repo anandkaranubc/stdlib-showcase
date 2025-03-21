@@ -4,18 +4,19 @@ import { useState } from "react";
 import { ClipboardCopy } from "lucide-react";
 
 const CodeSnippet = () => {
-  const codeString = `import linspace from "@stdlib/array/base/linspace";
+  const codeString = `import uniform from "@stdlib/random/array/uniform";
+import logEachMap from "@stdlib/console/log-each-map";
 import hyp2f1 from "@stdlib/math/base/special/hyp2f1";
 
-const a = linspace( -50.0, 50.0, 100 );
-const b = linspace( -50.0, 50.0, 100 );
-const c = linspace( -50.0, 50.0, 100 );
-const x = linspace( -50.0, 50.0, 100 );
+opts = {
+	'dtype': 'float64'
+};
+var a = uniform( 100, -50.0, 50.0, opts );
+var b = uniform( 100, -50.0, 50.0, opts );
+var c = uniform( 100, -50.0, 50.0, opts );
+var x = uniform( 100, -50.0, 50.0, opts );
 
-for (let i = 0; i < x.length; i++ ) {
-    console.log( 'a: %d, b: %d, c: %d, x: %d, 2F1(a,b;c;x): %d', 
-        a[ i ], b[ i ], c[ i ], x[ i ], hyp2f1( a[ i ], b[ i ], c[ i ], x[ i ] ) );
-    }`;
+logEachMap( '2F1(%d,%d;%d;%d) = %d', a, b, c, x, hyp2f1 );`;
 
   const [copied, setCopied] = useState(false);
 
