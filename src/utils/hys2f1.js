@@ -33,11 +33,11 @@
 
 // MODULES //
 
-var PINF = require( '@stdlib/constants/float64/pinf' );
-var round = require( '@stdlib/math/base/special/round' );
-var abs = require( '@stdlib/math/base/special/abs' );
-var isNonPositiveInteger = require( './isnonpositiveinteger.cjs' );
-var config = require( './config.json' );
+import PINF from '@stdlib/constants/float64/pinf';
+import round from '@stdlib/math/base/special/round';
+import abs from '@stdlib/math/base/special/abs';
+import isNonPositiveInteger from './isnonpositiveinteger.js';
+import config from './config.json';
 
 
 // VARIABLES //
@@ -236,4 +236,4 @@ function hys2f1( a, b, c, x, loss ) {
 
 // EXPORTS //
 
-module.exports = hys2f1;
+export default hys2f1;

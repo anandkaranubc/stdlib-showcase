@@ -33,9 +33,9 @@
 
 // MODULES //
 
-var round = require( '@stdlib/math/base/special/round' );
-var abs = require( '@stdlib/math/base/special/abs' );
-var config = require( './config.json' );
+import round from '@stdlib/math/base/special/round';
+import abs from '@stdlib/math/base/special/abs';
+import config from './config.json';
 
 
 // VARIABLES //
@@ -64,4 +64,4 @@ function isInteger( x ) {
 
 // EXPORTS //
 
-module.exports = isInteger;
+export default isInteger;

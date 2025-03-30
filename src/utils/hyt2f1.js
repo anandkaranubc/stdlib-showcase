@@ -33,20 +33,20 @@
 
 // MODULES //
 
-var abs = require( '@stdlib/math/base/special/abs' );
-var pow = require( '@stdlib/math/base/special/pow' );
-var max = require( '@stdlib/math/base/special/max' );
-var exp = require( '@stdlib/math/base/special/exp' );
-var ln = require( '@stdlib/math/base/special/ln' );
-var round = require( '@stdlib/math/base/special/round' );
-var gamma = require( '@stdlib/math/base/special/gamma' );
-var gammaln = require( '@stdlib/math/base/special/gammaln' );
-var gammasgn = require( '@stdlib/math/base/special/gammasgn' );
-var digamma = require( '@stdlib/math/base/special/digamma' );
-var isNonPositiveInteger = require( './isnonpositiveinteger.cjs' );
-var isInteger = require( './isinteger.cjs' );
-var hys2f1 = require( './hys2f1.cjs' );
-var config = require( './config.json' );
+import abs from '@stdlib/math/base/special/abs';
+import pow from '@stdlib/math/base/special/pow';
+import max from '@stdlib/math/base/special/max';
+import exp from '@stdlib/math/base/special/exp';
+import ln from '@stdlib/math/base/special/ln';
+import round from '@stdlib/math/base/special/round';
+import gamma from '@stdlib/math/base/special/gamma';
+import gammaln from '@stdlib/math/base/special/gammaln';
+import gammasgn from '@stdlib/math/base/special/gammasgn';
+import digamma from '@stdlib/math/base/special/digamma';
+import isNonPositiveInteger from './isnonpositiveinteger.js';
+import isInteger from './isinteger.js';
+import hys2f1 from './hys2f1.js';
+import config from './config.json';
 
 
 // VARIABLES //
@@ -239,4 +239,4 @@ function hyt2f1( a, b, c, x, loss ) {
 
 // EXPORTS //
 
-module.exports = hyt2f1;
+export default hyt2f1;

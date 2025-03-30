@@ -33,17 +33,17 @@
 
 // MODULES //
 
-var isnan = require( '@stdlib/assert/is-nan' );
-var PINF = require( '@stdlib/constants/float64/pinf' );
-var round = require( '@stdlib/math/base/special/round' );
-var gamma = require( '@stdlib/math/base/special/gamma' );
-var pow = require( '@stdlib/math/base/special/pow' );
-var abs = require( '@stdlib/math/base/special/abs' );
-var isNonPositiveInteger = require( './isnonpositiveinteger.cjs' );
-var isInteger = require( './isinteger.cjs' );
-var hys2f1 = require( './hys2f1.cjs' );
-var hyt2f1 = require( './hyt2f1.cjs' );
-var config = require( './config.json' );
+import isnan from '@stdlib/assert/is-nan';
+import PINF from '@stdlib/constants/float64/pinf';
+import round from '@stdlib/math/base/special/round';
+import gamma from '@stdlib/math/base/special/gamma';
+import pow from '@stdlib/math/base/special/pow';
+import abs from '@stdlib/math/base/special/abs';
+import isNonPositiveInteger from './isnonpositiveinteger.js';
+import isInteger from './isinteger.js';
+import hys2f1 from './hys2f1.js';
+import hyt2f1 from './hyt2f1.js';
+import config from './config.json';
 
 
 // VARIABLES //
@@ -276,4 +276,4 @@ function hyp2f1( a, b, c, x ) {
 
 // EXPORTS //
 
-module.exports = hyp2f1;
+export default hyp2f1;

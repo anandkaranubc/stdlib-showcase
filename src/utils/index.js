@@ -50,9 +50,9 @@
 
 // MODULES //
 
-var hyp2f1 = require( './main.cjs' );
+import hyp2f1 from "./main.js";
 
 
 // EXPORTS //
 
-module.exports = hyp2f1;
+export default hyp2f1;
