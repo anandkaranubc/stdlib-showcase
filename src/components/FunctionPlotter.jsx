@@ -5,7 +5,7 @@ import Slider from "./Slider";
 
 function FunctionPlotter() {
   const [xRange, setXRange] = React.useState([-10, 10]);
-  const [a, setA] = React.useState(1);
+  const [a, setA] = React.useState(-7);
   const [b, setB] = React.useState(1);
   const [c, setC] = React.useState(2);
 
