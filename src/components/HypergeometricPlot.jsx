@@ -10,65 +10,48 @@ import {
   Legend,
 } from "recharts";
 
-const HypergeometricPlot = ({ dataUrl, yMin, yMax, xRange }) => {
+// Local imports:
+import hyp2f1 from "../utils/index.js";
+
+const HypergeometricPlot = ({ a, b, c, yMin, yMax, xRange, step = 0.1 }) => {
   const [chartData, setChartData] = useState([]);
-  const [params, setParams] = useState({ a: null, b: null, c: null });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(dataUrl);
-        const text = await response.text();
-        const jsonData = JSON.parse(text);
-
-        if (
-          Array.isArray(jsonData.a) &&
-          jsonData.a.length > 0 &&
-          Array.isArray(jsonData.b) &&
-          jsonData.b.length > 0 &&
-          Array.isArray(jsonData.c) &&
-          jsonData.c.length > 0
-        ) {
-          setParams({ a: jsonData.a[0], b: jsonData.b[0], c: jsonData.c[0] });
+    const computeData = () => {
+      const data = [];
+      for (let x = xRange[0]; x <= xRange[1]; x += step) {
+        let y;
+        try {
+          y = hyp2f1(a, b, c, x);
+        } catch (e) {
+          y = "NaN";
         }
 
-        const formattedData = jsonData.x.map((xVal, index) => {
-          let yValue = jsonData.hyp2f1[index];
+        if (y === Infinity || y > 1e5) y = "Inf";
+        else if (y === -Infinity || y < -1e5) y = "-Inf";
 
-          if (yValue === Infinity || yValue > 1e5) yValue = "Inf";
-          else if (yValue === -Infinity || yValue < -1e5) yValue = "-Inf";
-
-          return {
-            x: parseFloat(xVal.toFixed(2)),
-            hyp2f1: yValue,
-          };
+        data.push({
+          x: parseFloat(x.toFixed(2)),
+          hyp2f1: y,
         });
-
-        setChartData(formattedData);
-      } catch (error) {
-        console.error("Error loading JSON data:", error);
       }
+      setChartData(data);
     };
 
-    fetchData();
-  }, [dataUrl]);
-
-  // Filter data based on the xRange
-  const filteredData = chartData.filter(
-    (point) => point.x >= xRange[0] && point.x <= xRange[1]
-  );
+    computeData();
+  }, [a, b, c, xRange, step]);
 
   return (
     <div className="w-full md:w-3/4 lg:w-2/3 mx-auto h-[500px] bg-gradient-to-br from-gray-50 to-gray-200 shadow-lg rounded-xl px-8 py-6 mb-6">
       <h2 className="text-2xl font-semibold text-center text-gray-800 mb-5">
         Hypergeometric Function{" "}
         <span className="text-blue-600">
-          ₂F₁({params.a ?? "a"},{params.b ?? "b"};{params.c ?? "c"};x)
+          ₂F₁({a},{b};{c};x)
         </span>
       </h2>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
-          data={filteredData}
+          data={chartData}
           margin={{ top: 10, right: 30, left: 20, bottom: 40 }}
         >
           <CartesianGrid strokeDasharray="4 4" stroke="#ddd" />
@@ -86,7 +69,9 @@ const HypergeometricPlot = ({ dataUrl, yMin, yMax, xRange }) => {
           <YAxis
             domain={[yMin, yMax]}
             tickFormatter={(value) =>
-              value === "Inf" || value === "-Inf" ? value : value.toFixed(2)
+              value === "Inf" || value === "-Inf" || isNaN(value)
+                ? value
+                : value.toFixed(2)
             }
             label={{
               value: "₂F₁(a,b;c;x)",
@@ -105,7 +90,9 @@ const HypergeometricPlot = ({ dataUrl, yMin, yMax, xRange }) => {
               fontSize: "14px",
             }}
             formatter={(value) =>
-              value === "Inf" || value === "-Inf" ? value : value.toFixed(4)
+              value === "Inf" || value === "-Inf" || isNaN(value)
+                ? value
+                : value.toFixed(4)
             }
           />
           <Legend
